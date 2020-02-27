@@ -1,3 +1,11 @@
+// Title: stan_sepAlphas_noLambda_noDecay_noRescaling
+// By: Jonny Giordano
+// Data: February 26th, 2020
+
+// Purpose: This script fits multiple learning rates for positive, negative valence
+// and is based on the M3 version by Brown
+
+// Notes:
 // this is a stan version of the M3 version used by Vanessa Brown
 // 1) assume lambda = 1
 // 2) assume a single learning rate (alpha)
