@@ -114,9 +114,9 @@ model {
 
       // Optimization
       tcounts = rep_array(0, 2, 2); // square matrix: choice x 2nd Stage State, Reset to all zeros
-      qm = rep_array(0, 2); // Qm = Model Based Value, Rest to zeros
-      qt1 = rep_array(0, 2); // Qt Model Free Value, First Stage , Reset to zeros
-      qt2 = rep_array(0, 2, 2); // Model Free Values, Square Matrix:  2nd Stage State x Final Choice, Reset to zeros
+      qm = rep_array(0.0, 2); // Qm = Model Based Value, Rest to zeros
+      qt1 = rep_array(0.0, 2); // Qt Model Free Value, First Stage , Reset to zeros
+      qt2 = rep_array(0.0, 2, 2); // Model Free Values, Square Matrix:  2nd Stage State x Final Choice, Reset to zeros
       pc = 0;
 
       for (t in 1:NT[s]) {
@@ -155,7 +155,6 @@ model {
         
         //Multiple Alphas
         qt2[st[s,t],c2[s,t]+1] = (delta_2 >=0) ? qt2[st[s,t],c2[s,t]+1] + delta_2 * alpha_p[s] : qt2[st[s,t],c2[s,t]+1] + delta_2 * alpha_n[s];
-        
         
       }
       
