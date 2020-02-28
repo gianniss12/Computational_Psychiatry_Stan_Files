@@ -39,7 +39,8 @@ standata = list(NS= NS, MT=MT, NT= as.vector(NT), c1=c1, c2=c2, st=st, r=r)
 
 seed <- runif(1,1,1e6); # Stan wants a random integer from 1 to max supportable
 
-fit <- stan(file = 'stan_fitting_scripts/JG_stan_sepAlphas_noLambda_noDecay_noRescaling.stan', data = standata, seed=seed, iter = 1, chains = 1)
+#fit <- stan(file = 'stan_fitting_scripts/JG_stan_sepAlphas_noLambda_noDecay_noRescaling.stan', data = standata, seed=seed, iter = 1, chains = 1)
+fit <- stan(file = 'stan_fitting_scripts/CG_stan_sepBetas_noLambda_nodecay_noRescaling-EDIT.stan', data = standata, seed=seed, iter = 1, chains = 1)
 
 
 # sflist = mclapply(1:4, mc.cores = 4, function(i) stan(fit=fit, seed = sample.int(.Machine$integer.max, 1), data = standata, iter=1000, chains = 1, chain_id = i)) #, refresh = -1))
@@ -50,11 +51,9 @@ fit <- stan(file = 'stan_fitting_scripts/JG_stan_sepAlphas_noLambda_noDecay_noRe
 
 
 # Windows
-fit = pstan(fit=fit, seed = sample.int(.Machine$integer.max, 1), data = standata, iter=4000, chains = 4, refresh = 1)
+fit = pstan(fit=fit, seed = sample.int(.Machine$integer.max, 1), data = standata, iter=100, chains = 4, refresh = 1)
 
-save.image(file = "fittings/stanfits_jonny_output_m3_s2_Feb26_2020_test.RData", version = NULL, ascii = FALSE)
-#
-
+save.image(file = "stan_fits/stanfits_sepAlpha_100iter_test.RData", version = NULL, ascii = FALSE)
 
 
 # run this part first and then save how you wish later
