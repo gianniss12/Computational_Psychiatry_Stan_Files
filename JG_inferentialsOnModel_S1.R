@@ -6,9 +6,17 @@ library(matlab)
 
 setwd('C:/Users/jgior/Desktop/Internship/Modeling-eLife/')
 load('stan_fits/stanfits_jonny_output_s1_Feb2_2020.RData')
-m = extract(fit, permuted=TRUE)
+
+
+## Check R-Hat Values
+fit_summary = summary(fit)
+print(fit_summary$summary)
+
 
 ## Derive subject means for Betas, Alpha
+m = extract(fit, permuted=TRUE)
+
+# For Single Alpha
 # bySubj = data.frame(subj=unique(data$subj), betac=rep(0,(length(unique(data$subj)))), alpha1=rep(0,(length(unique(data$subj)))), beta1m=rep(0,(length(unique(data$subj)))), beta1t=rep(0,(length(unique(data$subj)))),beta2=rep(0,(length(unique(data$subj)))))
 # 
 # for( i in 1:length(unique(data$subj))){
@@ -22,12 +30,6 @@ bySubj[i,2:7] = c(mean(m$betac[,i]),mean(m$alpha_p[,i]), mean(m$alpha_n[,i]), me
 }
 #
 
-
-
-## Check R-Hat Values
-
-fit_summary = summary(fit)
-print(fit_summary$summary)
 
 ## Load in Psychiatric Scores
 

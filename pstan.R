@@ -53,7 +53,7 @@ fit <- stan(file = 'stan_fitting_scripts/JG_stan_sepBetas_noLambda_nodecay_noRes
 # Windows
 fit = pstan(fit=fit, seed = sample.int(.Machine$integer.max, 1), data = standata, iter=4000, chains = 4, refresh = 1)
 
-'save.image(file = "stan_fits/stanfits_sepAlpha_daw_s2_March1_2020.RData", version = NULL, ascii = FALSE)
+save.image(file = "stan_fits/JG_s2_simpDaw_sepAlpha_March2_2020.RData", version = NULL, ascii = FALSE)
 
 
 # run this part first and then save how you wish later
