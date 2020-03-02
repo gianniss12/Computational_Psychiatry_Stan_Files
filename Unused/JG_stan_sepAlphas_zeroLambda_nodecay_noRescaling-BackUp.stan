@@ -7,7 +7,7 @@
 
 // Notes:
 // This is a simplified version of the Daw model. No seperate parameters for each stage
-// 1) assume lambda = 1
+// 1) assume lambda = 0
 // 2) assume multiple learning rates
 // 3) code separate model based beta and model free betaa
 // 4) DO NOT rescale the learning rule updates (by alpha) to get more consistent scaling on betas
@@ -164,17 +164,30 @@ model {
         pc = 2 * c1[s,t] - 1;
         tcounts[c1[s,t]+1,st[s,t]] = tcounts[c1[s,t]+1,st[s,t]] + 1;
         
-        // delta_1 = r - qt1
-        delta_1 = r[s,t] - qt1[c1[s,t]+1]; 
-        
-        // delta_2 = r - qt2
+        delta_1 = qt2[st[s,t],c2[s,t]+1]-qt1[c1[s,t]+1]; 
         delta_2 = r[s,t] - qt2[st[s,t],c2[s,t]+1];
         
-        // Multiple Learning Rates : qt1 = qt1 + alpha_x * (delta_1)
+        //// first step updating TD value: (old qt1 value + (value of second stage state - value of choice) * alpha)
+        //// 1. update first state: (old qt1 value + (reward - value of second state)*alpha)
+        //qt1[c1[s,t]+1] = qt1[c1[s,t]+1] + alpha1[s]*(delta_1+delta_2);
+
+        // 2. Multiple Learning Rates : qt1 = qt1 + alpha_x * (delta_1 + delta_2)
+        //qt1[c1[s,t]+1] = (delta_1 >= 0) ? qt1[c1[s,t]+1] + alpha_p[s]*(delta_1+delta_2) : qt1[c1[s,t]+1] + alpha_n[s]*(delta_1+delta_2);
+        
+        // 3. Multiple Learning Rates : qt1 = qt1 + alpha_x * (delta_1)
         qt1[c1[s,t]+1] = (delta_1 >= 0) ? qt1[c1[s,t]+1] + (alpha_p[s] * delta_1) : qt1[c1[s,t]+1] + (alpha_n[s] * delta_1);
 
-        // Multiple Learning Rates : qt2 = qt2 + alpha_x * (delta_2)
-        qt2[st[s,t],c2[s,t]+1] = (delta_2 >=0) ? qt2[st[s,t],c2[s,t]+1] + (alpha_p[s] * delta_2) : qt2[st[s,t],c2[s,t]+1] + (alpha_n[s] * delta_2);
+        //Test with just positive Alpha_p, Alpha_n
+        //qt1[c1[s,t]+1] = qt1[c1[s,t]+1] + alpha_n[s]*(delta_1+delta_2);
+        
+        //// 1. second step updating TD value: (old qt2 value + (reward - value of second state)* alpha)
+        //qt2[st[s,t],c2[s,t]+1] = qt2[st[s,t],c2[s,t]+1] + (r[s,t] - qt2[st[s,t],c2[s,t]+1] ) * alpha1[s];
+        
+        // 2, 3. Multiple Learning Rates : qt2 = qt2 + alpha_x * (delta_2)
+        qt2[st[s,t],c2[s,t]+1] = (delta_2 >=0) ? qt2[st[s,t],c2[s,t]+1] + (delta_2 * alpha_p[s]) : qt2[st[s,t],c2[s,t]+1] + (delta_2 * alpha_n[s]);
+
+        //Test with just positive Alpha_p, Alpha_n
+        //qt2[st[s,t],c2[s,t]+1] = qt2[st[s,t],c2[s,t]+1] + (r[s,t] - qt2[st[s,t],c2[s,t]+1] ) * alpha_n[s];
 
 
         

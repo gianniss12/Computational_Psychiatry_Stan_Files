@@ -7,7 +7,7 @@
 
 // Notes:
 // This is a simplified version of the Daw model. No seperate parameters for each stage
-// 1) assume lambda = 1
+// 1) assume lambda = 0
 // 2) assume multiple learning rates
 // 3) code separate model based beta and model free betaa
 // 4) DO NOT rescale the learning rule updates (by alpha) to get more consistent scaling on betas
@@ -164,8 +164,8 @@ model {
         pc = 2 * c1[s,t] - 1;
         tcounts[c1[s,t]+1,st[s,t]] = tcounts[c1[s,t]+1,st[s,t]] + 1;
         
-        // delta_1 = r - qt1
-        delta_1 = r[s,t] - qt1[c1[s,t]+1]; 
+        // delta_1 = qt2 - qt1
+        delta_1 = qt2[st[s,t],c2[s,t]+1]-qt1[c1[s,t]+1]; 
         
         // delta_2 = r - qt2
         delta_2 = r[s,t] - qt2[st[s,t],c2[s,t]+1];
@@ -177,7 +177,6 @@ model {
         qt2[st[s,t],c2[s,t]+1] = (delta_2 >=0) ? qt2[st[s,t],c2[s,t]+1] + (alpha_p[s] * delta_2) : qt2[st[s,t],c2[s,t]+1] + (alpha_n[s] * delta_2);
 
 
-        
       }
       
     }
