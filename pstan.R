@@ -9,7 +9,7 @@ mc.cores = parallel::detectCores()
 
 setwd('C:/Users/jgior/Desktop/Internship/Modeling-eLife')
 
-data = read.csv('data/modelData_s1_forJonny.dat',sep=" ")
+data = read.csv('data/modelData_s2_forJonny_edit.dat',sep=" ")
 
 ##
 data = subset(data, trial_num<=400)
