@@ -1,6 +1,7 @@
 library(rstan)
 library(parallel)
 library(matlab)
+library(shinystan)
 
 ## Load in Stan Fitted Model
 
@@ -11,6 +12,10 @@ load('stan_fits/stanfits_jonny_output_s1_Feb2_2020.RData')
 ## Check R-Hat Values
 fit_summary = summary(fit)
 print(fit_summary$summary)
+
+#Shinystan
+my_shinystan = as.shinystan(fit)
+launch_shinystan(my_shinystan)
 
 
 ## Derive subject means for Betas, Alpha
