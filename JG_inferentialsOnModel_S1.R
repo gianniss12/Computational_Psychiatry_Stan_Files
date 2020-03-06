@@ -46,8 +46,35 @@ sreps = scores[c("subj", "age", "iq", "gender", "sds_total", "stai_total", "oci_
 ## Merge Psychiatric scores with Subject fittings
 comb = merge(sreps, bySubj, by="subj")
 
-## Analysis
+## Analysis - Model-Based Beta
 
 summary(lm(beta1m ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
 summary(lm(beta1m ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
 summary(lm(beta1m ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
+
+## Analysis - Alpha_p
+
+summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
+summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
+summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
+
+## Analysis - Alpha_n
+
+summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
+summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
+summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
+
+## Analysis - [alpha_p - alpha-n] / [alpha_p + alpha_n]
+
+summary(lm(([alpha_p-alpha_n]/[alpha_p+alpha_n]) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
+summary(lm(([alpha_p-alpha_n]/[alpha_p+alpha_n]) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
+summary(lm(([alpha_p-alpha_n]/[alpha_p+alpha_n]) ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
+
+## Analysis - Alpha1_p
+
+## Analysis - Alpha1_n
+
+## Analysis - Alpha2_p
+
+## Analysis - Alpha2_n
+

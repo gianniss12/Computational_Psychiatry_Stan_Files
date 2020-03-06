@@ -39,7 +39,7 @@ standata = list(NS= NS, MT=MT, NT= as.vector(NT), c1=c1, c2=c2, st=st, r=r)
 
 seed <- runif(1,1,1e6); # Stan wants a random integer from 1 to max supportable
 
-fit <- stan(file = 'stan_fitting_scripts/stan_allparams_nodecay.stan', data = standata, seed=seed, iter = 1, chains = 1)
+fit <- stan(file = 'stan_fitting_scripts/JG_stan_sepAlphas_sepStages_noLambda_noDecay_noRescaling.stan', data = standata, seed=seed, iter = 1, chains = 1)
 
 # sflist = mclapply(1:4, mc.cores = 4, function(i) stan(fit=fit, seed = sample.int(.Machine$integer.max, 1), data = standata, iter=1000, chains = 1, chain_id = i)) #, refresh = -1))
 
