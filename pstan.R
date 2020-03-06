@@ -49,7 +49,7 @@ fit <- stan(file = 'stan_fitting_scripts/JG_stan_sepAlphas_sepStages_noLambda_no
 
 
 # Windows
-fit = pstan(fit=fit, seed = sample.int(.Machine$integer.max, 1), data = standata, iter=4000, chains = 4, refresh = 1)
+fit = pstan(fit=fit, seed = sample.int(.Machine$integer.max, 1), data = standata, iter=100, chains = 4, refresh = 1)
 
 save.image(file = "stan_fits/JG_s1_Sharp_noDecay_March4_2020.RData", version = NULL, ascii = FALSE)
 

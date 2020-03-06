@@ -22,18 +22,24 @@ launch_shinystan(my_shinystan)
 m = extract(fit, permuted=TRUE)
 
 # For Single Alpha
-# bySubj = data.frame(subj=unique(data$subj), betac=rep(0,(length(unique(data$subj)))), alpha1=rep(0,(length(unique(data$subj)))), beta1m=rep(0,(length(unique(data$subj)))), beta1t=rep(0,(length(unique(data$subj)))),beta2=rep(0,(length(unique(data$subj)))))
-# 
-# for( i in 1:length(unique(data$subj))){
-#     bySubj[i,2:6] = c(mean(m$betac[,i]),mean(m$alpha1[,i]), mean(m$beta1m[,i]),mean(m$beta1t[,i]), mean(m$beta2[,i]))
-# }
+bySubj = data.frame(subj=unique(data$subj), betac=rep(0,(length(unique(data$subj)))), alpha1=rep(0,(length(unique(data$subj)))), beta1m=rep(0,(length(unique(data$subj)))), beta1t=rep(0,(length(unique(data$subj)))),beta2=rep(0,(length(unique(data$subj)))))
+ 
+for( i in 1:length(unique(data$subj))){
+     bySubj[i,2:6] = c(mean(m$betac[,i]),mean(m$alpha1[,i]), mean(m$beta1m[,i]),mean(m$beta1t[,i]), mean(m$beta2[,i]))
+}
 
 # For Multiple Alphas
 bySubj = data.frame(subj=unique(data$subj), betac=rep(0,(length(unique(data$subj)))), alpha_p=rep(0,(length(unique(data$subj)))), alpha_n=rep(0,(length(unique(data$subj)))), beta1m=rep(0,(length(unique(data$subj)))), beta1t=rep(0,(length(unique(data$subj)))),beta2=rep(0,(length(unique(data$subj)))))
 for( i in 1:length(unique(data$subj))){
 bySubj[i,2:7] = c(mean(m$betac[,i]),mean(m$alpha_p[,i]), mean(m$alpha_n[,i]), mean(m$beta1m[,i]),mean(m$beta1t[,i]), mean(m$beta2[,i]))
 }
-#
+
+# For Multiple Alphas, Seperate Stages
+bySubj = data.frame(subj=unique(data$subj), betac=rep(0,(length(unique(data$subj)))), alpha_p=rep(0,(length(unique(data$subj)))), alpha_n=rep(0,(length(unique(data$subj)))), beta1m=rep(0,(length(unique(data$subj)))), beta1t=rep(0,(length(unique(data$subj)))),beta2=rep(0,(length(unique(data$subj)))))
+for( i in 1:length(unique(data$subj))){
+  bySubj[i,2:7] = c(mean(m$betac[,i]),mean(m$alpha1_p[,i]), mean(m$alpha1_n[,i]), mean(m$alpha2_p[,i]), mean(m$alpha2_n[,i]), mean(m$beta1m[,i]),mean(m$beta1t[,i]), mean(m$beta2[,i]))
+}
+
 
 
 ## Load in Psychiatric Scores
@@ -66,9 +72,9 @@ summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(stai_total), data=c
 
 ## Analysis - [alpha_p - alpha-n] / [alpha_p + alpha_n]
 
-summary(lm(([alpha_p-alpha_n]/[alpha_p+alpha_n]) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
-summary(lm(([alpha_p-alpha_n]/[alpha_p+alpha_n]) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
-summary(lm(([alpha_p-alpha_n]/[alpha_p+alpha_n]) ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
+summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
+summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
+summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
 
 ## Analysis - Alpha1_p
 
