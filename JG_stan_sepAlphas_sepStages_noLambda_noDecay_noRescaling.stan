@@ -1,8 +1,8 @@
-// Title: stan_sepAlphas_noLambda_noDecay_noRescaling
+// Title: stan_sepAlphas_sepStages_noLambda_noDecay_noRescaling
 // By: Jonny Giordano
 // Data: February 26th, 2020
 
-// Purpose: This script fits multiple learning rates for positive, negative valence
+// Purpose: This script fits multiple learning rates for positive, negative valence at each stage
 // and is based on the M3 version by Brown
 
 // Notes:
@@ -80,8 +80,8 @@ parameters {
   real beta2[NS];
   real betac[NS];    
 
- 
 }
+
 transformed parameters {
 	real a1pa;
 	real a1pb;
@@ -137,8 +137,8 @@ model {
   
       alpha1_p[s] ~ beta(a1pa,a1pb);
       alpha2_p[s] ~ beta(a2pa,a2pb);
-      alpha1_n[s] ~ beta(a1na, a1nb);
-      alpha2_n[s] ~ beta(a2na, a2nb);
+      alpha1_n[s] ~ beta(a1na,a1nb);
+      alpha2_n[s] ~ beta(a2na,a2nb);
       beta1m[s] ~ normal(b1mm,b1ms);
       beta1t[s] ~ normal(b1tm,b1ts);
       beta2[s] ~ normal(b2m,b2s);

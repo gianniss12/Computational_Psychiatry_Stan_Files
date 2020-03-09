@@ -46,8 +46,6 @@ for( i in 1:length(unique(data$subj))){
 
 scores = read.csv('data/self_report_study1.csv', header=TRUE)
 sreps = scores[c("subj", "age", "iq", "gender", "sds_total", "stai_total", "oci_total")]
-#sreps$subj = sreps$subj.x
-
 
 ## Merge Psychiatric scores with Subject fittings
 comb = merge(sreps, bySubj, by="subj")
