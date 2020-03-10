@@ -144,7 +144,6 @@ model {
       beta2[s] ~ normal(b2m,b2s);
       betac[s] ~ normal(bcm,bcs);
 
-      //// Optimization
       tcounts = rep_array(0, 2, 2); //// square matrix: choice x 2nd Stage State, Reset to all zeros
       qm = rep_array(0.0, 2); //// Qm = Model Based Value, Rest to zeros
       qt1 = rep_array(0.0, 2); //// Qt Model Free Value, First Stage , Reset to zeros

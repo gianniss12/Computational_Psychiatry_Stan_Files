@@ -124,12 +124,7 @@ model {
       beta2[s] ~ normal(b2m,b2s);
       betac[s] ~ normal(bcm,bcs);
 
-      ////for (i in 1:2) for (j in 1:2) tcounts[i,j] = 0;
-      ////for (i in 1:2) {qm[i] = 0; qt1[i] = 0;}
-      ////for (i in 1:2) for (j in 1:2) qt2[i,j] = 0;
-      ////pc = 0;
-      
-      //// Optimization
+
       tcounts = rep_array(0, 2, 2); //// square matrix: choice x 2nd Stage State, Reset to all zeros
       qm = rep_array(0.0, 2); //// Qm = Model Based Value, Rest to zeros
       qt1 = rep_array(0.0, 2); //// Qt Model Free Value, First Stage , Reset to zeros
@@ -142,14 +137,6 @@ model {
         int nc2;
         int nst;
 
-        ////[1] = if_else(int_step(tcounts[1,1]+tcounts[2,2]-tcounts[1,2]-tcounts[2,1]), 
-        ////  fmax(qt2[1,1],qt2[1,2]), fmax(qt2[2,1],qt2[2,2]));
-
-        //// qm[2] = if_else(int_step(tcounts[1,1]+tcounts[2,2]-tcounts[1,2]-tcounts[2,1]), 
-        ////  fmax(qt2[2,1],qt2[2,2]), fmax(qt2[1,1],qt2[1,2]));
-          //previously betac[s]
-          
-        //// Optimization
         qm[1] = (int_step(tcounts[1,1]+tcounts[2,2]-tcounts[1,2]-tcounts[2,1]) ? fmax(qt2[1,1],qt2[1,2]) : fmax(qt2[2,1],qt2[2,2]));
         
         qm[2] = (int_step(tcounts[1,1]+tcounts[2,2]-tcounts[1,2]-tcounts[2,1]) ? fmax(qt2[2,1],qt2[2,2]) : fmax(qt2[1,1],qt2[1,2]));
