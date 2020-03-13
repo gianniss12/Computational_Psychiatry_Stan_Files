@@ -35,9 +35,9 @@ bySubj[i,2:7] = c(mean(m$betac[,i]),mean(m$alpha_p[,i]), mean(m$alpha_n[,i]), me
 }
 
 # For Multiple Alphas, Seperate Stages
-bySubj = data.frame(subj=unique(data$subj), betac=rep(0,(length(unique(data$subj)))), alpha_p=rep(0,(length(unique(data$subj)))), alpha_n=rep(0,(length(unique(data$subj)))), beta1m=rep(0,(length(unique(data$subj)))), beta1t=rep(0,(length(unique(data$subj)))),beta2=rep(0,(length(unique(data$subj)))))
+bySubj = data.frame(subj=unique(data$subj), betac=rep(0,(length(unique(data$subj)))), alpha1_p=rep(0,(length(unique(data$subj)))), alpha1_n=rep(0,(length(unique(data$subj)))), alpha2_p=rep(0,(length(unique(data$subj)))), alpha2_n=rep(0,(length(unique(data$subj)))), beta1m=rep(0,(length(unique(data$subj)))), beta1t=rep(0,(length(unique(data$subj)))),beta2=rep(0,(length(unique(data$subj)))))
 for( i in 1:length(unique(data$subj))){
-  bySubj[i,2:7] = c(mean(m$betac[,i]),mean(m$alpha1_p[,i]), mean(m$alpha1_n[,i]), mean(m$alpha2_p[,i]), mean(m$alpha2_n[,i]), mean(m$beta1m[,i]),mean(m$beta1t[,i]), mean(m$beta2[,i]))
+  bySubj[i,2:9] = c(mean(m$betac[,i]),mean(m$alpha1_p[,i]), mean(m$alpha1_n[,i]), mean(m$alpha2_p[,i]), mean(m$alpha2_n[,i]), mean(m$beta1m[,i]),mean(m$beta1t[,i]), mean(m$beta2[,i]))
 }
 
 
@@ -58,21 +58,21 @@ summary(lm(beta1m ~ scale(iq) + scale(age) + gender + scale(stai_total), data=co
 
 ## Analysis - Alpha_p
 
-summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
-summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
-summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
+summary(lm(alpha1_p ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
+summary(lm(alpha1_p ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
+summary(lm(alpha1_p ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
 
 ## Analysis - Alpha_n
 
-summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
-summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
-summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
+summary(lm(alpha1_n ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
+summary(lm(alpha1_n ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
+summary(lm(alpha1_n ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
 
-## Analysis - [alpha_p - alpha-n] / [alpha_p + alpha_n]
+## Analysis - [alpha1_p - alpha2_n] / [alpha1_p + alpha1_n]
 
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
+summary(lm(((alpha1_p-alpha1_n)/(alpha1_p+alpha1_n)) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
+summary(lm(((alpha1_p-alpha1_n)/(alpha1_p+alpha1_n)) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
+summary(lm(((alpha1_p-alpha1_n)/(alpha1_p+alpha1_n)) ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
 
 ## Analysis - Alpha1_p
 
