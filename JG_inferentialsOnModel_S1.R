@@ -58,27 +58,54 @@ summary(lm(beta1m ~ scale(iq) + scale(age) + gender + scale(stai_total), data=co
 
 ## Analysis - Alpha_p
 
+summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
+summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
+summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
+
+## Analysis - Alpha_n
+
+summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
+summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
+summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
+
+## Analysis - [alpha_p - alpha_n] / [alpha_p + alpha_n]
+
+summary(lm(((alpha_p-alpha1_n)/(alpha_p+alpha1_n)) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
+summary(lm(((alpha_p-alpha1_n)/(alpha_p+alpha1_n)) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
+summary(lm(((alpha_p-alpha1_n)/(alpha_p+alpha1_n)) ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
+
+## Analysis - Alpha1_p
+
 summary(lm(alpha1_p ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
 summary(lm(alpha1_p ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
 summary(lm(alpha1_p ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
 
-## Analysis - Alpha_n
+## Analysis - Alpha1_n
 
 summary(lm(alpha1_n ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
 summary(lm(alpha1_n ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
 summary(lm(alpha1_n ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
 
-## Analysis - [alpha1_p - alpha2_n] / [alpha1_p + alpha1_n]
+## Analysis - [alpha1_p - alpha1_n] / [alpha1_p + alpha1_n]
 
 summary(lm(((alpha1_p-alpha1_n)/(alpha1_p+alpha1_n)) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
 summary(lm(((alpha1_p-alpha1_n)/(alpha1_p+alpha1_n)) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
 summary(lm(((alpha1_p-alpha1_n)/(alpha1_p+alpha1_n)) ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
 
-## Analysis - Alpha1_p
-
-## Analysis - Alpha1_n
-
 ## Analysis - Alpha2_p
+
+summary(lm(alpha2_p ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
+summary(lm(alpha2_p ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
+summary(lm(alpha2_p ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
 
 ## Analysis - Alpha2_n
 
+summary(lm(alpha2_n ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
+summary(lm(alpha2_n ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
+summary(lm(alpha2_n ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
+
+## Analysis - [alpha2_p - alpha2_n] / [alpha2_p + alpha2_n]
+
+summary(lm(((alpha2_p-alpha2_n)/(alpha2_p+alpha2_n)) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
+summary(lm(((alpha2_p-alpha2_n)/(alpha2_p+alpha2_n)) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
+summary(lm(((alpha2_p-alpha2_n)/(alpha2_p+alpha2_n)) ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
