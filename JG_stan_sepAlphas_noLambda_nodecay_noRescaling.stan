@@ -152,10 +152,10 @@ model {
         tcounts[c1[s,t]+1,st[s,t]] = tcounts[c1[s,t]+1,st[s,t]] + 1;
         
         // delta_1 = qt2 - qt1
-        //delta_1 = qt2[st[s,t],c2[s,t]+1] - qt1[c1[s,t]+1];
+        delta_1 = qt2[st[s,t],c2[s,t]+1] - qt1[c1[s,t]+1];
         
         // delta_1 = r - qt1
-        delta_1 = r[s,t] - qt1[c1[s,t]+1]; 
+        //delta_1 = r[s,t] - qt1[c1[s,t]+1]; 
         
         // delta_2 = r - qt2
         delta_2 = r[s,t] - qt2[st[s,t],c2[s,t]+1];
@@ -164,7 +164,7 @@ model {
         qt1[c1[s,t]+1] = (delta_1 >= 0) ? qt1[c1[s,t]+1] + (alpha_p[s] * delta_1) : qt1[c1[s,t]+1] + (alpha_n[s] * delta_1);
 
         // Multiple Learning Rates : qt2 = qt2 + alpha_x * (delta_2)
-        qt2[st[s,t],c2[s,t]+1] = (delta_2 >=0) ? qt2[st[s,t],c2[s,t]+1] + (alpha_p[s] * delta_2) : qt2[st[s,t],c2[s,t]+1] + (alpha_n[s] * delta_2);
+        qt2[st[s,t],c2[s,t]+1] = (delta_2 >= 0) ? qt2[st[s,t],c2[s,t]+1] + (alpha_p[s] * delta_2) : qt2[st[s,t],c2[s,t]+1] + (alpha_n[s] * delta_2);
 
 
       }
