@@ -182,7 +182,7 @@ model {
         delta_diff = r[s,t] - qt1[c1[s,t]+1];
         
         // Multiple Learning Rates : qt1 = qt1 + alpha_x * (delta_1)
-        qt1[c1[s,t]+1] = (delta_1 >= 0) ? qt1[c1[s,t]+1] + (alpha1_p[s] * delta_1) : qt1[c1[s,t]+1] + (alpha1_n[s] * delta_1);
+        qt1[c1[s,t]+1] = (delta_1 >= 0) ? qt1[c1[s,t]+1] + (alpha1_p[s] * delta_diff) : qt1[c1[s,t]+1] + (alpha1_n[s] * delta_diff);
 
         // Multiple Learning Rates : qt2 = qt2 + alpha_x * (delta_2)
         qt2[st[s,t],c2[s,t]+1] = (delta_2 >=0) ? qt2[st[s,t],c2[s,t]+1] + (alpha2_p[s] * delta_2) : qt2[st[s,t],c2[s,t]+1] + (alpha2_n[s] * delta_2);
