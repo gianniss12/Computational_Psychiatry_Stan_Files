@@ -71,33 +71,55 @@ comb = merge(sreps, bySubj, by="subj")
 symptoms = c("sds","stai","oci", "lsas", "bis", "scz", "aes", "eat", "audit")
 factors = c("Factor1", "Factor2", "Factor3")
 
-
-
-
 ### Analysis for 2 Learning Rates ###
-## Analysis - Alpha_p
+## Percent-Change, Percent-Change SE - Alpha_p
 
-coeff = rep(0,9)
-coeff[1] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))$coefficients[5,1]
-coeff[2] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))$coefficients[5,1]
-coeff[3] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))$coefficients[5,1]
-coeff[4] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))$coefficients[5,1]
-coeff[5] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))$coefficients[5,1]
-coeff[6] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))$coefficients[5,1]
-coeff[7] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))$coefficients[5,1]
-coeff[8] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))$coefficients[5,1]
-coeff[9] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))$coefficients[5,1]
-coeff = coeff*100
-symp_p = data.frame(symptoms, coeff)
-symp_p = symp_p[order(symp_p$coeff),]
+#Symptoms
 
-coeff = rep(0,3)
-coeff[1] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))$coefficients[5,1]
-coeff[2] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))$coefficients[5,1]
-coeff[3] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))$coefficients[5,1]
-coeff = coeff*100
-fact_p = data.frame(factors, coeff)
+change = rep(0,9)
 
+base = sum(summary(lm(alpha_p ~ scale(iq) + scale(age) + gender, data=comb))$coefficients[2:4,1])
+change[1] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))$coefficients[5,1]/base
+change[2] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))$coefficients[5,1]/base
+change[3] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))$coefficients[5,1]/base
+change[4] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))$coefficients[5,1]/base
+change[5] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))$coefficients[5,1]/base
+change[6] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))$coefficients[5,1]/base
+change[7] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))$coefficients[5,1]/base
+change[8] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))$coefficients[5,1]/base
+change[9] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))$coefficients[5,1]/base
+change = change*100
+
+change_se = rep(0,9)
+
+base = sum(summary(lm(alpha_p ~ scale(iq) + scale(age) + gender, data=comb))$coefficients[2:4,2])
+change_se[1] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))$coefficients[5,2]/base
+change_se[2] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))$coefficients[5,2]/base
+change_se[3] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))$coefficients[5,2]/base
+change_se[4] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))$coefficients[5,2]/base
+change_se[5] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))$coefficients[5,2]/base
+change_se[6] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))$coefficients[5,2]/base
+change_se[7] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))$coefficients[5,2]/base
+change_se[8] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))$coefficients[5,2]/base
+change_se[9] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))$coefficients[5,2]/base
+change_se = change_se*100
+symp_p_se = data.frame(symptoms, change, change_se)
+
+
+# Factors
+
+change = rep(0,3)
+change[1] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))$coefficients[5,1]/base
+change[2] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))$coefficients[5,1]/base
+change[3] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))$coefficients[5,1]/base
+change = change*100
+
+change_se = rep(0,3)
+change_se[1] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))$coefficients[5,2]/base
+change_se[2] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))$coefficients[5,2]/base
+change_se[3] = summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))$coefficients[5,2]/base
+change_se = change_se*100
+fact_p_se = data.frame(factors, change, change_se)
 
 ### Summaries
 
@@ -119,28 +141,52 @@ summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb
 
 
 
-## Analysis - Alpha_n
+## Percent-Change - Alpha_n
 
-coeff = rep(0,9)
-coeff[1] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))$coefficients[5,1]
-coeff[2] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))$coefficients[5,1]
-coeff[3] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))$coefficients[5,1]
-coeff[4] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))$coefficients[5,1]
-coeff[5] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))$coefficients[5,1]
-coeff[6] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))$coefficients[5,1]
-coeff[7] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))$coefficients[5,1]
-coeff[8] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))$coefficients[5,1]
-coeff[9] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))$coefficients[5,1]
-coeff = coeff*100
-symp_n = data.frame(symptoms, coeff)
-symp_n = symp_n[order(symp_n$coeff),]
+change = rep(0,9)
 
-coeff = rep(0,3)
-coeff[1] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))$coefficients[5,1]
-coeff[2] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))$coefficients[5,1]
-coeff[3] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))$coefficients[5,1]
-coeff = coeff*100
-fact_n = data.frame(factors, coeff)
+base = sum(summary(lm(alpha_n ~ scale(iq) + scale(age) + gender, data=comb))$coefficients[2:4,1])
+change[1] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))$coefficients[5,1]/base
+change[2] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))$coefficients[5,1]/base
+change[3] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))$coefficients[5,1]/base
+change[4] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))$coefficients[5,1]/base
+change[5] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))$coefficients[5,1]/base
+change[6] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))$coefficients[5,1]/base
+change[7] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))$coefficients[5,1]/base
+change[8] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))$coefficients[5,1]/base
+change[9] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))$coefficients[5,1]/base
+change = change*100
+
+change_se = rep(0,9)
+
+base = sum(summary(lm(alpha_n ~ scale(iq) + scale(age) + gender, data=comb))$coefficients[2:4,2])
+change_se[1] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))$coefficients[5,2]/base
+change_se[2] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))$coefficients[5,2]/base
+change_se[3] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))$coefficients[5,2]/base
+change_se[4] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))$coefficients[5,2]/base
+change_se[5] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))$coefficients[5,2]/base
+change_se[6] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))$coefficients[5,2]/base
+change_se[7] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))$coefficients[5,2]/base
+change_se[8] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))$coefficients[5,2]/base
+change_se[9] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))$coefficients[5,2]/base
+change_se = change_se*100
+symp_n_se = data.frame(symptoms, change, change_se)
+
+
+# Factors
+
+change = rep(0,3)
+change[1] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))$coefficients[5,1]/base
+change[2] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))$coefficients[5,1]/base
+change[3] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))$coefficients[5,1]/base
+change = change*100
+
+change_se = rep(0,3)
+change_se[1] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))$coefficients[5,2]/base
+change_se[2] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))$coefficients[5,2]/base
+change_se[3] = summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))$coefficients[5,2]/base
+change_se = change_se*100
+fact_n_se = data.frame(factors, change, change_se)
 
 ### Summaries
 
@@ -179,28 +225,32 @@ summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gend
 
 
 ### Plotting ################
-symp_p$symptoms = with(symp_p, reorder(symptoms, coeff))
-ggplot(data=symp_p, aes(x=symptoms, y=coeff, fill=symptoms)) +
+symp_p$symptoms = with(symp_p, reorder(symptoms, change))
+ggplot(data=symp_p, aes(x=symptoms, y=change, fill=symptoms)) +
   geom_bar(colour="black", stat="identity") +
+  geom_errorbar(aes(ymin=change-change_se, ymax=change+change_se), colour="black", width=.1) +
   xlab("Clinical Scales") + ylab("Percent Change in Positive Learning") +
   ggtitle("Percentage Change in Positive Learning By Clinical Scale") +
   guides(fill=FALSE)
 
-ggplot(data=fact_p, aes(x=factors, y=coeff, fill=factors)) +
+ggplot(data=fact_p, aes(x=factors, y=change, fill=factors)) +
   geom_bar(colour="black", stat="identity") +
+  geom_errorbar(aes(ymin=change-change_se, ymax=change+change_se), colour="black", width=.1) +
   xlab("Clinical Scales") + ylab("Percent Change in Positive Learning") +
   ggtitle("Percentage Change in Positive Learning By Factor") +
   guides(fill=FALSE) 
   
-symp_n$symptoms = with(symp_n, reorder(symptoms, coeff))
-ggplot(data=symp_n, aes(x=symptoms, y=coeff, fill=symptoms)) +
+symp_n$symptoms = with(symp_n, reorder(symptoms, change))
+ggplot(data=symp_n, aes(x=symptoms, y=change, fill=symptoms)) +
   geom_bar(colour="black", stat="identity") +
+  geom_errorbar(aes(ymin=change-change_se, ymax=change+change_se), colour="black", width=.1) +
   xlab("Clinical Scales") + ylab("Percent Change in Negative Learning") +
   ggtitle("Percentage Change in Negative Learning By Clinical Scale") +
   guides(fill=FALSE)
 
-ggplot(data=fact_n, aes(x=factors, y=coeff, fill=factors)) +
+ggplot(data=fact_n, aes(x=factors, y=change, fill=factors)) +
   geom_bar(colour="black", stat="identity") +
+  geom_errorbar(aes(ymin=change-change_se, ymax=change+change_se), colour="black", width=.1) +
   xlab("Clinical Scales") + ylab("Percent Change in Negative Learning") +
   ggtitle("Percentage Change in Negative Learning By Factor") +
   guides(fill=FALSE) 
