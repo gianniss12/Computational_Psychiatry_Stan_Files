@@ -58,8 +58,8 @@ parameters {
   real<lower=0> b2s;
 
   // group level perseveration beta
-  real bcm;
-  real<lower=0> bcs;
+  # real bcm;
+  # real<lower=0> bcs;
 
   // per subject learning rates
   //real<lower=0,upper=1> alpha1[NS];
@@ -70,7 +70,7 @@ parameters {
   real beta1m[NS];
   real beta1t[NS];
   real beta2[NS];
-  real betac[NS];    
+  # real betac[NS];    
 
  
 }
@@ -95,8 +95,8 @@ model {
 
   // priors
   
-  bcm ~ normal(0,100);
-  bcs ~ cauchy(0,2.5); //cauchy(0,2.5);cauchy(0,2.5);// above this was .1 in w version...? not sure why.
+  #bcm ~ normal(0,100);
+  #bcs ~ cauchy(0,2.5); //cauchy(0,2.5);cauchy(0,2.5);// above this was .1 in w version...? not sure why.
   
   b1mm ~ normal(0,100);
   b1ms ~ cauchy(0,2.5);
@@ -109,7 +109,7 @@ model {
   // group level model (parameters per subject)
 
 	for (s in 1:NS) {
-        int pc;
+        #int pc;
         int tcounts[2,2];
         real qm[2];
         real qt1[2];
@@ -130,7 +130,7 @@ model {
       qm = rep_array(0.0, 2); //// Qm = Model Based Value, Rest to zeros
       qt1 = rep_array(0.0, 2); //// Qt Model Free Value, First Stage , Reset to zeros
       qt2 = rep_array(0.0, 2, 2); //// Model Free Values, Square Matrix:  2nd Stage State x Final Choice, Reset to zeros
-      pc = 0;
+      #pc = 0;
       
 
       for (t in 1:NT[s]) {
