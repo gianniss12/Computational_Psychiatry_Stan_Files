@@ -51,7 +51,30 @@ summary(bySubj_97.5)
 
 
 ### No Stickiness Parameter
+m### For Multiple Alphas, Both Stages ##########################
+bySubj = data.frame(subj=unique(data$subj), alpha_p=rep(0,(length(unique(data$subj)))), alpha_n=rep(0,(length(unique(data$subj)))), beta1m=rep(0,(length(unique(data$subj)))), beta1t=rep(0,(length(unique(data$subj)))),beta2=rep(0,(length(unique(data$subj)))))
+for( i in 1:length(unique(data$subj))){
+  bySubj[i,2:6] = c(mean(m$alpha_p[,i]), mean(m$alpha_n[,i]), mean(m$beta1m[,i]),mean(m$beta1t[,i]), mean(m$beta2[,i]))
+}
+summary(bySubj)
 
+## Show Mean Value Histograms
+hist(bySubj$alpha_p)
+hist(bySubj$alpha_n)
+
+## Checking 2.5% Quantile
+bySubj_2.5 = data.frame(subj=unique(data$subj), alpha_p=rep(0,(length(unique(data$subj)))), alpha_n=rep(0,(length(unique(data$subj)))), beta1m=rep(0,(length(unique(data$subj)))), beta1t=rep(0,(length(unique(data$subj)))),beta2=rep(0,(length(unique(data$subj)))))
+for( i in 1:length(unique(data$subj))){
+  bySubj_2.5[i,2:6] = c(quantile(m$alpha_p[,i], probs = c(.025)), quantile(m$alpha_n[,i], probs = c(.025)), quantile(m$beta1m[,i], probs = c(.025)),quantile(m$beta1t[,i], probs = c(.025)), quantile(m$beta2[,i], probs = c(.025)))
+}
+summary(bySubj_2.5)
+
+##Checking 97.5% Quantile
+bySubj_97.5 = data.frame(subj=unique(data$subj), alpha_p=rep(0,(length(unique(data$subj)))), alpha_n=rep(0,(length(unique(data$subj)))), beta1m=rep(0,(length(unique(data$subj)))), beta1t=rep(0,(length(unique(data$subj)))),beta2=rep(0,(length(unique(data$subj)))))
+for( i in 1:length(unique(data$subj))){
+  bySubj_97.5[i,2:6] = c(quantile(m$alpha_p[,i], probs = c(.975)), quantile(m$alpha_n[,i], probs = c(.975)), quantile(m$beta1m[,i], probs = c(.975)),quantile(m$beta1t[,i], probs = c(.975)), quantile(m$beta2[,i], probs = c(.975)))
+}
+summary(bySubj_97.5)
 
 
 
@@ -271,6 +294,9 @@ summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gend
 summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))
 summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))
 
+summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(Factor1) + scale(Factor2) + scale(Factor3), data=comb))
+
+
 ### Analysis (Alpha_p - alpha_n)
 summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
 summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
@@ -286,6 +312,7 @@ summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(Factor1),
 summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))
 summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))
 
+summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(Factor1) + scale(Factor2) + scale(Factor3), data=comb))
 
 
 ### Plotting ################
@@ -310,11 +337,12 @@ ggplot(data=fact, aes(x=factors, y=change, fill=factors)) +
 
 
 #Plot % Change Positive Learning Rate By Symptoms
+
 symp_p$symptoms = with(symp_p, reorder(symptoms, change))
 ggplot(data=symp_p, aes(x=symptoms, y=change, fill=symptoms)) +
   geom_bar(colour="black", stat="identity") +
   geom_errorbar(aes(ymin=change-change_se, ymax=change+change_se), colour="black", width=.1) +
-  ylim(-5, 2) +
+  ylim(-5, 3) +
   xlab("Clinical Scales") + ylab("Percent Change in Positive Learning") +
   ggtitle("Percentage Change in Positive Learning By Clinical Scale") +
   guides(fill=FALSE)
@@ -333,7 +361,7 @@ symp_n$symptoms = with(symp_n, reorder(symptoms, change))
 ggplot(data=symp_n, aes(x=symptoms, y=change, fill=symptoms)) +
   geom_bar(colour="black", stat="identity") +
   geom_errorbar(aes(ymin=change-change_se, ymax=change+change_se), colour="black", width=.1) +
-  ylim(-4, 2.5) +
+  ylim(-4, 4.5) +
   xlab("Clinical Scales") + ylab("Percent Change in Negative Learning") +
   ggtitle("Percentage Change in Negative Learning By Clinical Scale") +
   guides(fill=FALSE)
@@ -342,7 +370,7 @@ ggplot(data=symp_n, aes(x=symptoms, y=change, fill=symptoms)) +
 ggplot(data=fact_n, aes(x=factors, y=change, fill=factors)) +
   geom_bar(colour="black", stat="identity") +
   geom_errorbar(aes(ymin=change-change_se, ymax=change+change_se), colour="black", width=.1) +
-  ylim(-4, 2.5) +
+  ylim(-4, 4.5) +
   xlab("Clinical Scales") + ylab("Percent Change in Negative Learning") +
   ggtitle("Percentage Change in Negative Learning By Factor") +
   guides(fill=FALSE) 
@@ -351,7 +379,7 @@ ggplot(data=fact_n, aes(x=factors, y=change, fill=factors)) +
 ### Correlations
 
 #Alpha_p by alpha_n
-ggplot(data = merged, aes(y=alpha_p, x=alpha_n)) +
+ggplot(data = comb, aes(y=alpha_p, x=alpha_n)) +
   geom_point() +
   geom_smooth(method=lm) +
   xlab("Model 5 - No Reward Learning Rate") +
