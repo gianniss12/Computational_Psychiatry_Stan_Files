@@ -128,9 +128,9 @@ model {
 
 
       tcounts = rep_array(0, 2, 2); //// square matrix: choice x 2nd Stage State, Reset to all zeros
-      qm = rep_array(0.0, 2); //// Qm = Model Based Value, Rest to zeros
-      qt1 = rep_array(0.0, 2); //// Qt Model Free Value, First Stage , Reset to zeros
-      qt2 = rep_array(0.0, 2, 2); //// Model Free Values, Square Matrix:  2nd Stage State x Final Choice, Reset to zeros
+      qm = rep_array(0.5, 2); //// Qm = Model Based Value, Rest to zeros
+      qt1 = rep_array(0.5, 2); //// Qt Model Free Value, First Stage , Reset to zeros
+      qt2 = rep_array(0.5, 2, 2); //// Model Free Values, Square Matrix:  2nd Stage State x Final Choice, Reset to zeros
       #pc = 0;
       
 

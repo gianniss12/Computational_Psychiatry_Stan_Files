@@ -94,6 +94,7 @@ summary(lm(beta1m ~ scale(iq) + scale(age) + gender + scale(stai_total), data=co
 ## Analysis - Alpha_p
 
 summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
+
 summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
 summary(lm(alpha_p ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
 
@@ -103,11 +104,11 @@ summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(sds_total), data=co
 summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
 summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
 
-## Analysis - [alpha_p - alpha_n] / [alpha_p + alpha_n]
+## Analysis - [alpha_n - alpha_p]
 
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
+summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
+summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
+summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
 
 
 ### Analysis for 4 Learning Rates (2 LRs per Step) ###

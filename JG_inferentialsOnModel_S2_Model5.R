@@ -298,21 +298,21 @@ summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gend
 
 
 ### Analysis (Alpha_p - alpha_n)
-summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
-summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
-summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
-summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))
-summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))
-summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))
-summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))
-summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))
-summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))
+summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
+summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
+summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
+summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))
+summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))
+summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))
+summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))
+summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))
+summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))
 
-summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))
-summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))
-summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))
+summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))
+summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))
+summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))
 
-summary(lm((alpha_p-alpha_n) ~ scale(iq) + scale(age) + gender + scale(Factor1) + scale(Factor2) + scale(Factor3), data=comb))
+summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor1) + scale(Factor2) + scale(Factor3), data=comb))
 
 
 ### Plotting ################
