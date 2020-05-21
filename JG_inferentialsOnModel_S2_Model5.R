@@ -24,7 +24,7 @@ launch_shinystan(my_shinystan)
 m = extract(fit, permuted=TRUE)
 
 
-m### For Multiple Alphas, Both Stages ##########################
+### For Multiple Alphas, Both Stages ##########################
 bySubj = data.frame(subj=unique(data$subj), betac=rep(0,(length(unique(data$subj)))), alpha_p=rep(0,(length(unique(data$subj)))), alpha_n=rep(0,(length(unique(data$subj)))), beta1m=rep(0,(length(unique(data$subj)))), beta1t=rep(0,(length(unique(data$subj)))),beta2=rep(0,(length(unique(data$subj)))))
 for( i in 1:length(unique(data$subj))){
   bySubj[i,2:7] = c(mean(m$betac[,i]),mean(m$alpha_p[,i]), mean(m$alpha_n[,i]), mean(m$beta1m[,i]),mean(m$beta1t[,i]), mean(m$beta2[,i]))
@@ -98,28 +98,28 @@ factors = c("Factor1", "Factor2", "Factor3")
 
 change = rep(0,9)
 
-change[1] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(sds_total), data=merge))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(sds_total), data=merge))$coefficients[1,1]
-change[2] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(stai_total), data=merge))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(stai_total), data=merge))$coefficients[1,1]
-change[3] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(oci_total), data=merge))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(oci_total), data=merge))$coefficients[1,1]
-change[4] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=merge))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=merge))$coefficients[1,1]
-change[5] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(bis_total), data=merge))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(bis_total), data=merge))$coefficients[1,1]
-change[6] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(scz_total), data=merge))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(scz_total), data=merge))$coefficients[1,1]
-change[7] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(aes_total), data=merge))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(aes_total), data=merge))$coefficients[1,1]
-change[8] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(eat_total), data=merge))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(eat_total), data=merge))$coefficients[1,1]
-change[9] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(audit_total), data=merge))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(audit_total), data=merge))$coefficients[1,1]
+change[1] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))$coefficients[1,1]
+change[2] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))$coefficients[1,1]
+change[3] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))$coefficients[1,1]
+change[4] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))$coefficients[1,1]
+change[5] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))$coefficients[1,1]
+change[6] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))$coefficients[1,1]
+change[7] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))$coefficients[1,1]
+change[8] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))$coefficients[1,1]
+change[9] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))$coefficients[1,1]
 change = change*100
 
 change_se = rep(0,9)
 
-change_se[1] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(sds_total), data=merge))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(sds_total), data=merge))$coefficients[1,1]
-change_se[2] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(stai_total), data=merge))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(stai_total), data=merge))$coefficients[1,1]
-change_se[3] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(oci_total), data=merge))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(oci_total), data=merge))$coefficients[1,1]
-change_se[4] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=merge))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=merge))$coefficients[1,1]
-change_se[5] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(bis_total), data=merge))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(bis_total), data=merge))$coefficients[1,1]
-change_se[6] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(scz_total), data=merge))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(scz_total), data=merge))$coefficients[1,1]
-change_se[7] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(aes_total), data=merge))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(aes_total), data=merge))$coefficients[1,1]
-change_se[8] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(eat_total), data=merge))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(eat_total), data=merge))$coefficients[1,1]
-change_se[9] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(audit_total), data=merge))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(audit_total), data=merge))$coefficients[1,1]
+change_se[1] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))$coefficients[1,1]
+change_se[2] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))$coefficients[1,1]
+change_se[3] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))$coefficients[1,1]
+change_se[4] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))$coefficients[1,1]
+change_se[5] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))$coefficients[1,1]
+change_se[6] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))$coefficients[1,1]
+change_se[7] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))$coefficients[1,1]
+change_se[8] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))$coefficients[1,1]
+change_se[9] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))$coefficients[1,1]
 change_se = change_se*100
 symp = data.frame(symptoms, change, change_se)
 
@@ -127,15 +127,15 @@ symp = data.frame(symptoms, change, change_se)
 # Factors
 
 change = rep(0,3)
-change[1] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor1), data=merge))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor1), data=merge))$coefficients[1,1]
-change[2] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor2), data=merge))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor2), data=merge))$coefficients[1,1]
-change[3] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor3), data=merge))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor3), data=merge))$coefficients[1,1]
+change[1] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))$coefficients[1,1]
+change[2] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))$coefficients[1,1]
+change[3] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))$coefficients[5,1]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))$coefficients[1,1]
 change = change*100
 
 change_se = rep(0,3)
-change_se[1] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor1), data=merge))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor1), data=merge))$coefficients[1,1]
-change_se[2] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor2), data=merge))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor2), data=merge))$coefficients[1,1]
-change_se[3] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor3), data=merge))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor3), data=merge))$coefficients[1,1]
+change_se[1] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))$coefficients[1,1]
+change_se[2] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))$coefficients[1,1]
+change_se[3] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))$coefficients[5,2]/summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))$coefficients[1,1]
 change_se = change_se*100
 fact = data.frame(factors, change, change_se)
 
@@ -277,26 +277,6 @@ summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb
 summary(lm(alpha_n ~ scale(iq) + scale(age) + gender + scale(Factor1) + scale(Factor2) + scale(Factor3), data=comb))
 
 
-
-## Analysis - [alpha_p - alpha_n] / [alpha_p + alpha_n]
-
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))
-
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))
-
-summary(lm(((alpha_p-alpha_n)/(alpha_p+alpha_n)) ~ scale(iq) + scale(age) + gender + scale(Factor1) + scale(Factor2) + scale(Factor3), data=comb))
-
-
 ### Analysis (Alpha_p - alpha_n)
 summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))
 summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))
@@ -313,6 +293,52 @@ summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor2),
 summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))
 
 summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor1) + scale(Factor2) + scale(Factor3), data=comb))
+
+
+## Percent Change Plotting (Alpha_n - Alpha_p)
+
+change = rep(0,9)
+
+change[1] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))$coefficients[5,1]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))$coefficients[1,1]
+change[2] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))$coefficients[5,1]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))$coefficients[1,1]
+change[3] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))$coefficients[5,1]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))$coefficients[1,1]
+change[4] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))$coefficients[5,1]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))$coefficients[1,1]
+change[5] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))$coefficients[5,1]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))$coefficients[1,1]
+change[6] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))$coefficients[5,1]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))$coefficients[1,1]
+change[7] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))$coefficients[5,1]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))$coefficients[1,1]
+change[8] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))$coefficients[5,1]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))$coefficients[1,1]
+change[9] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))$coefficients[5,1]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))$coefficients[1,1]
+change = change*100
+
+change_se = rep(0,9)
+
+change_se[1] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))$coefficients[5,2]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))$coefficients[1,1]
+change_se[2] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))$coefficients[5,2]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))$coefficients[1,1]
+change_se[3] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))$coefficients[5,2]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))$coefficients[1,1]
+change_se[4] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))$coefficients[5,2]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))$coefficients[1,1]
+change_se[5] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))$coefficients[5,2]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))$coefficients[1,1]
+change_se[6] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))$coefficients[5,2]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))$coefficients[1,1]
+change_se[7] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))$coefficients[5,2]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))$coefficients[1,1]
+change_se[8] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))$coefficients[5,2]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))$coefficients[1,1]
+change_se[9] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))$coefficients[5,2]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))$coefficients[1,1]
+change_se = change_se*100
+symp_diff = data.frame(symptoms, change, change_se)
+
+
+# Factors
+
+change = rep(0,3)
+change[1] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))$coefficients[5,1]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))$coefficients[1,1]
+change[2] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))$coefficients[5,1]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))$coefficients[1,1]
+change[3] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))$coefficients[5,1]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))$coefficients[1,1]
+change = change*100
+
+change_se = rep(0,3)
+change_se[1] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))$coefficients[5,2]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))$coefficients[1,1]
+change_se[2] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))$coefficients[5,2]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))$coefficients[1,1]
+change_se[3] = summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))$coefficients[5,2]/summary(lm((alpha_n-alpha_p) ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))$coefficients[1,1]
+change_se = change_se*100
+fact_diff = data.frame(factors, change, change_se)
 
 
 ### Plotting ################
@@ -375,6 +401,25 @@ ggplot(data=fact_n, aes(x=factors, y=change, fill=factors)) +
   ggtitle("Percentage Change in Negative Learning By Factor") +
   guides(fill=FALSE) 
 
+# Plot % Change Difference in Learning Rate
+symp_diff$symptoms = with(symp_diff, reorder(symptoms, change))
+ggplot(data=symp_n, aes(x=symptoms, y=change, fill=symptoms)) +
+  geom_bar(colour="black", stat="identity") +
+  geom_errorbar(aes(ymin=change-change_se, ymax=change+change_se), colour="black", width=.1) +
+  #ylim(-4, 20) +
+  xlab("Clinical Scales") + ylab("Percent Change in Difference in Learning") +
+  ggtitle("Percentage Change in Difference in Learning Rates By Clinical Scale") +
+  guides(fill=FALSE)
+
+# Plot % Change Difference in Learning Rate by Factors
+ggplot(data=fact_diff, aes(x=factors, y=change, fill=factors)) +
+  geom_bar(colour="black", stat="identity") +
+  geom_errorbar(aes(ymin=change-change_se, ymax=change+change_se), colour="black", width=.1) +
+  #ylim(-4, 20) +
+  xlab("Clinical Scales") + ylab("Percent Change in Difference in Learning") +
+  ggtitle("Percentage Change in Difference in Learning Rates By Factor") +
+  guides(fill=FALSE)
+
 
 ### Correlations
 
@@ -399,7 +444,7 @@ ggplot(data = merged, aes(y=alpha_p, x=alpha1)) +
 
 
 #alpha_n by alpha1
-ggplot(data = merged, aes(y=alpha_n, x=alpha1)) +
+ggplot(data = symp, aes(y=alpha_n, x=alpha1)) +
   geom_point() +
   geom_smooth(method=lm) +
   xlab("Model 3 - Single Learning Rate") +
@@ -409,7 +454,7 @@ ggplot(data = merged, aes(y=alpha_n, x=alpha1)) +
 
 ### Other ScatterPlots
 
-ggplot(data = merge, aes(y=stai_total, x=alpha1)) +
+ggplot(data = fact, aes(y=stai_total, x=alpha1)) +
   geom_point() +
   geom_smooth(method=lm) +
   xlab("Model 3 - Single Learning Rate") +

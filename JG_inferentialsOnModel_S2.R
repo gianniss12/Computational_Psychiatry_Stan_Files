@@ -144,6 +144,30 @@ summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb)
 summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor1) + scale(Factor2) + scale(Factor3), data=comb))
 
 
+## For Figures
+## Analysis - Alpha1 - Single LR
+
+coeff = rep(0,9)
+coeff[1] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(sds_total), data=comb))$coefficients[5,1]
+coeff[2] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(stai_total), data=comb))$coefficients[5,1]
+coeff[3] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(oci_total), data=comb))$coefficients[5,1]
+coeff[4] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(lsas_total), data=comb))$coefficients[5,1]
+coeff[5] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(bis_total), data=comb))$coefficients[5,1]
+coeff[6] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(scz_total), data=comb))$coefficients[5,1]
+coeff[7] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(aes_total), data=comb))$coefficients[5,1]
+coeff[8] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(eat_total), data=comb))$coefficients[5,1]
+coeff[9] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(audit_total), data=comb))$coefficients[5,1]
+coeff = coeff*100
+symp_1 = data.frame(symptoms, coeff)
+
+coeff = rep(0,3)
+coeff[1] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor1), data=comb))$coefficients[5,1]
+coeff[2] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor2), data=comb))$coefficients[5,1]
+coeff[3] = summary(lm(alpha1 ~ scale(iq) + scale(age) + gender + scale(Factor3), data=comb))$coefficients[5,1]
+coeff = coeff*100
+fact_1 = data.frame(factors, coeff)
+
+
 
 ### Analysis for 2 Learning Rates ###
 ## Analysis - Alpha_p
@@ -257,3 +281,18 @@ ggplot(data=fact_n, aes(x=factors, y=coeff, fill=factors)) +
   xlab("Clinical Scales") + ylab("Percent Change in Negative Learning") +
   ggtitle("Percentage Change in Negative Learning By Factor") +
   guides(fill=FALSE) 
+
+# Single Learning Rate
+
+ggplot(data=symp_1, aes(x=symptoms, y=coeff, fill=symptoms)) +
+  geom_bar(colour="black", stat="identity") +
+  xlab("Clinical Scales") + ylab("Percent Change in Learning Rate") +
+  ggtitle("Percentage Change in Positive Learning By Clinical Scale") +
+  guides(fill=FALSE)
+
+ggplot(data=fact_1, aes(x=factors, y=coeff, fill=factors)) +
+  geom_bar(colour="black", stat="identity") +
+  xlab("Clinical Scales") + ylab("Percent Change in Learning Rate") +
+  ggtitle("Percentage Change in Learning Rate By Factor") +
+  guides(fill=FALSE) 
+
