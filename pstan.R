@@ -51,7 +51,7 @@ fit <- stan(file = 'stan_fitting_scripts/JG_stan_sepAlphas_r-qt1_oneLambda_noPer
 # Windows
 fit = pstan(fit=fit, seed = sample.int(.Machine$integer.max, 1), data = standata, iter=4000, chains = 4, refresh = 1)
 
-save.image(file = "stan_fits/JG_s2_sepAlphas_sepStages_r-qt1_NoStickiness_noDecay_init0.5_May18_2020.RData", version = NULL, ascii = FALSE)
+save.image(file = "stan_fits/JG_s2_sepAlphas_sepStages_r-qt1_NoStickiness_noDecay_init0.5_May21_2020.RData", version = NULL, ascii = FALSE)
 
 
 # run this part first and then save how you wish later

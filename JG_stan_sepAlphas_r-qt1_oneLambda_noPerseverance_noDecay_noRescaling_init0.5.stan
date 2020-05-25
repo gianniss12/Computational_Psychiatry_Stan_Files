@@ -99,13 +99,13 @@ model {
   #bcm ~ normal(0,100);
   #bcs ~ cauchy(0,2.5); //cauchy(0,2.5);cauchy(0,2.5);// above this was .1 in w version...? not sure why.
   
-  b1mm ~ normal(0,5);
-  b1ms ~ cauchy(0,12);
-  b1tm ~ normal(0,5);
-  b1ts ~ cauchy(0,12);
+  b1mm ~ normal(0,100);
+  b1ms ~ cauchy(0,25);
+  b1tm ~ normal(0,100);
+  b1ts ~ cauchy(0,25);
   
-  b2m ~ normal(0,5);
-  b2s ~ cauchy(0,12);
+  b2m ~ normal(0,100);
+  b2s ~ cauchy(0,25);
 
   // group level model (parameters per subject)
 
